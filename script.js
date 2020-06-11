@@ -1,69 +1,64 @@
-var box = document.getElementById("box");
-var countInput = document.getElementById("count");
-var submitGuessButton = document.getElementById("submitGuess");
-var actualCountDisplay = document.getElementById("actualCount");
-var countDiffDisplay = document.getElementById("countDiff");
-var playAgainButton = document.getElementById("playAgain");
+let box = document.getElementById(`box`)
+let guess = document.getElementById(`guess`)
+let submitButton = document.getElementById(`submitButton`)
+let resultParagraph = document.getElementById(`resultParagraph`)
+let playAgainButton = document.getElementById(`playAgainButton`)
 
-var colors = ["red", "green", "blue"];
-var actualCount;
+let colors = [`red`, `green`, `blue`]
+let randomNumber
 
-submitGuessButton.addEventListener("click", submitGuess);
-playAgainButton.addEventListener("click", playAgain);
+submitButton.addEventListener(`click`, submit)
+playAgainButton.addEventListener(`click`, playAgain)
 
-generateBalls();
+makeBalls()
 
-function generateBalls() {
-    box.innerHTML = "";
-    actualCount = Math.floor(Math.random() * 900) + 100;
+function makeBalls() {
+  box.innerHTML = ``
+  randomNumber = Math.floor(Math.random() * 900) + 100
 
-    for (var i = 0; i < actualCount; i++) {
-        var randomColor = colors[Math.floor(Math.random() * colors.length)];
-        var randomLeft = Math.floor(Math.random() * 391);
-        var randomTop = Math.floor(Math.random() * 391);
+  for (let i = 0; i < randomNumber; i++) {
+    let randomColor = colors[Math.floor(Math.random() * colors.length)]
+    let randomLeft = Math.floor(Math.random() * 391)
+    let randomTop = Math.floor(Math.random() * 391)
 
-        var ball = document.createElement("div");
-        ball.classList.add("ball");
-        ball.style.backgroundColor = randomColor;
-        ball.style.left = randomLeft + "px";
-        ball.style.top = randomTop + "px";
+    let ball = document.createElement(`div`)
+    ball.classList.add(`ball`)
+    ball.style.backgroundColor = randomColor
+    ball.style.left = `${randomLeft}px`
+    ball.style.top = `${randomTop}px`
 
-        box.appendChild(ball);
-    }
+    box.appendChild(ball)
+  }
 }
 
-function submitGuess() {
-    var guessedCount = parseInt(countInput.value, 10);
+function submit() {
+  let guessValue = guess.value.trim()
 
-    if (!isNaN(guessedCount)) {
-        var countDiff = Math.abs(actualCount - guessedCount);
+  if (guessValue == `` || isNaN(guessValue)) {
+    resultParagraph.innerHTML = `Please type a number.`
+  }
+  else {
+    let diff = Math.abs(randomNumber - guessValue)
 
-        countInput.disabled = true;
-        submitGuessButton.disabled = true;
-
-        actualCountDisplay.style.display = "block";
-        actualCountDisplay.innerHTML = "Actual count: " + actualCount;
-
-        countDiffDisplay.style.display = "block";
-        countDiffDisplay.innerHTML = "You are off by " + countDiff;
-
-        playAgainButton.style.display = "initial";
+    if (diff == 0) {
+      resultParagraph.innerHTML = `You got it exactly, nice job!`
     }
+    else {
+      resultParagraph.innerHTML = `Count is ${randomNumber}. You were off by ${diff}.`
+    }
+
+    guess.disabled = true
+    submitButton.disabled = true
+    playAgainButton.style.display = `block`
+  }
 }
 
 function playAgain() {
-    countInput.value = "";
+  guess.value = ``
+  guess.disabled = false
+  submitButton.disabled = false
+  resultParagraph.innerHTML = ``
+  playAgainButton.style.display = `none`
 
-    countInput.disabled = false;
-    submitGuessButton.disabled = false;
-
-    actualCountDisplay.style.display = "none";
-    actualCountDisplay.innerHTML = "";
-
-    countDiffDisplay.style.display = "none";
-    countDiffDisplay.innerHTML = "";
-
-    playAgainButton.style.display = "none";
-
-    generateBalls();
+  makeBalls()
 }
