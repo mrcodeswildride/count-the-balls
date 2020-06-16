@@ -6,11 +6,10 @@ let playAgainButton = document.getElementById(`playAgainButton`)
 
 let colors = [`red`, `green`, `blue`]
 let randomNumber
+makeBalls()
 
 submitButton.addEventListener(`click`, submit)
 playAgainButton.addEventListener(`click`, playAgain)
-
-makeBalls()
 
 function makeBalls() {
   box.innerHTML = ``
