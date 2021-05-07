@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Count the Balls</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="script.js" defer></script>
+  </head>
 
-<head>
-	<title>Count the Balls</title>
-	<meta name="viewport" content="width=device-width, initial-scale=0.5">
-	<link href="style.css" rel="stylesheet">
-	<script src="script.js" defer>
+  <body>
+    <h1>Count the Balls</h1>
 
-	</script>
-</head>
+    <div id="box"></div>
 
-<body>
-	<h1>Count the Balls</h1>
+    <div id="sidePanel">
+      <p>How many balls are in the box?</p>
 
-	<div id="box"></div>
+      <input type="number" min="100" max="999" placeholder="100 - 999" id="guess" />
+      <button id="submitButton">Submit</button>
+      <p id="resultParagraph"></p>
 
-	<div id="sidePanel">
-		<p>
-			How many balls are in the box?
-		</p>
-
-		<input type="number" min="100" max="999" placeholder="100 - 999" id="guess">
-    <button id="submitButton">Submit</button>
-    <p id="resultParagraph"></p>
-
-    <button id="playAgainButton">Play again</button>
-  </div>
-</body>
-
+      <button id="playAgainButton">Play again</button>
+    </div>
+  </body>
 </html>

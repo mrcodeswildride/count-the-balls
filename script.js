@@ -11,6 +11,8 @@ makeBalls()
 submitButton.addEventListener(`click`, submit)
 playAgainButton.addEventListener(`click`, playAgain)
 
+guess.focus()
+
 function makeBalls() {
   box.innerHTML = ``
   randomNumber = Math.floor(Math.random() * 900) + 100
@@ -33,16 +35,14 @@ function makeBalls() {
 function submit() {
   let guessValue = guess.value.trim()
 
-  if (guessValue == `` || isNaN(guessValue)) {
-    resultParagraph.innerHTML = `Please type a number.`
-  }
-  else {
+  if (guessValue == ``) {
+    resultParagraph.innerHTML = `Type a number.`
+  } else {
     let diff = Math.abs(randomNumber - guessValue)
 
     if (diff == 0) {
       resultParagraph.innerHTML = `You got it exactly, nice job!`
-    }
-    else {
+    } else {
       resultParagraph.innerHTML = `Count is ${randomNumber}. You were off by ${diff}.`
     }
 
@@ -60,4 +60,5 @@ function playAgain() {
   playAgainButton.style.display = `none`
 
   makeBalls()
+  guess.focus()
 }
